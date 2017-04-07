@@ -1,0 +1,112 @@
+{% extends 'base4.html' %}
+{% load customtags %}
+{% load staticfiles %}
+{% block css %}
+<style>
+.title_{
+    font-size:20px;
+}
+.author_{
+    color:gray;
+}
+.time_recorded{
+    color:gray;
+}
+.content_{
+    margin-top:40px;
+    margin-left:5%;
+    margin-right:5%;
+    font-size:20px;
+}
+.edit_del{
+    margin-right:5%;
+}
+.comment_body{
+margin:1%;
+}
+button[type=submit]{
+  margin:1%;
+  float:right;
+  color:white;
+  padding:5px 15px;
+  background:orange;
+  border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+ <div class="page-topbar">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+
+            <h3>공지 사항</h3>
+
+          </div>
+          <div class="col-sm-8 hidden-xs">
+
+            <ol class="breadcrumb">
+              <li><a href="{% url 'notice:index' %}">Home</a></li>
+              <li><a href="{% url 'notice:notice_list' %}"> 리스트 보기 </a></li>
+              <li class="active">{{notice.title}}</li>
+            </ol>
+
+          </div>
+        </div> <!-- / .row -->
+      </div> <!-- / .container -->
+    </div>
+
+<div class = "container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="bolg__item">
+        <div class="blog__header">
+          <h1 class="blog__title">
+            {{ notice.title }}
+          </h1>
+          <ul class="blog__info">
+            <li><i class="fa fa-user"></i>&nbsp;{{ notice.author.first_name }}</li>
+            <li><i class="fa fa-calendar"></i>&nbsp;{{ notice.created_at}}</li>
+            <li><a href="/notice" style="color:white; background-color:orange;" class="btn btn-xs">List</a></li>
+            {% if request.user == notice.author %}
+              <li><a href="{% url 'notice:notice_edit' notice.pk %}" style="color:white; background-color: orange;" class="btn btn-xs">edit</a></li>
+              <li><a href="{% url 'notice:notice_del' notice.pk %}" style="color:white; background-color:orange;" class="btn btn-xs">delete</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="blog__body">
+          <p>
+            {{ notice.content|linebreaks }}
+          </p>
+        </div>
+
+         {% if notice.files %}
+          files : {{notice.files.url|split:"/"|last }} <br/>
+          <a download="{{notice.files.url}}" href="{{notice.files.url}}">파일 다운로드 받기</a><br>
+        {% endif %}
+
+        {% if notice.image %}
+          images : <img src="{{ notice.image.url }}" class="img-responsive" style="max-width: 50%"> <br/>
+          <a download="{{notice.image.url}}" href="{{notice.image.url}}">이미지 다운로드 받기</a>
+        {% endif %}
+        <br/><br/>
+      </div>
+      <div class="comments">
+      {% include 'notice/notice_comment_form.html' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block javascript %}
+<script>
+var js_root = "{% static 'js/comment_add.js'%}"
+</script>
+<script src="{% static 'js/comment_add.js' %}"></script>
+{% endblock %}

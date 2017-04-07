@@ -1,0 +1,232 @@
+{% load staticfiles %}
+<style>
+.footer-distributed .footer-left,
+.footer-distributed .footer-center,
+.footer-distributed .footer-right {
+  display: inline-block;
+  vertical-align: top;
+}
+
+
+/* Footer left */
+
+.footer-distributed .footer-left {
+  width: 10%;
+}
+
+
+/* Footer Right */
+
+.footer-distributed .footer-right {
+  width: 8%;
+}
+
+
+/* Footer Center */
+
+.footer-distributed .footer-center {
+  width: 5%;
+}
+
+.modal-bady {
+  -webkit-overflow-scrolling: touch;
+}
+
+#An_modal {
+  display: none;
+  position: absolute;
+  width: 80%;
+}
+
+.modal-header {
+  background-color: #313131;
+}
+
+
+/*
+#modal_content{
+    height: 750px;
+    width: 730px;
+}
+*/
+
+.modal-dialog {
+  width: 80%;
+}
+
+#icon_img_footer {
+  width: 80%;
+  margin: 4%;
+}
+
+#copy_right {
+  position: absolute;
+  right: 0px;
+}
+
+#image_container {
+  position: absolute;
+  width: 100%;
+}
+
+.creators {
+  display: block;
+  float: left;
+  /*
+    width:150px;
+    */
+  padding: 2%;
+  margin: 5%;
+}
+
+.creators2 {
+  display: block;
+  float: none;
+  margin: 0 13% auto;
+}
+
+.ourface {
+  margin: 10%;
+  padding: 3%;
+  width: 150px;
+  height: 150px;
+}
+
+#lion {
+  margin: 10%;
+  padding: 3%;
+  width: 150px;
+  height: 150px;
+}
+
+@media (max-width: 880px) {
+  .footer-distributed .footer-left,
+  .footer-distributed .footer-center,
+  .footer-distributed .footer-right {
+    display: block;
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .footer-distributed .footer-center i {
+    margin-left: 0;
+  }
+  .creators,
+  .creators2 {
+    margin: auto;
+  }
+  .modal-dialog {
+    width: 95%;
+  }
+  #ourface {
+    margin: 2%;
+    width: 150px;
+    height: 150px;
+  }
+  #hyuis_lion {
+    margin: 2%;
+    width: 150px;
+    height: 150px;
+  }
+}
+
+p.name {
+  color: white;
+}
+</style>
+<!--Footer Section START-->
+<section id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 text-center">
+        <hr class="primary">
+        <p>서울특별시 영등포구 국회대로70길19 307호(여의도동, 대하빌딩)</p>
+        {% if user.is_active %}
+        <b>공인회계사 채광훈 Tel) 010 - 2659 - 8926</b><br>
+        <b>공인회계사 윤현조 Tel) 010 - 5252 - 9025</b><br>
+        <b>세무사 신장환 Tel) 010 - 4669 - 7564</b><br> 
+        {% endif %}
+        <br>
+        <p>Developed by <a href="#" data-toggle="modal" data-target="#An_Modal">Us</a></p>
+      </div>
+      <div class="col-lg-4 col-lg-offset-2 text-center">
+        <i class="fa fa-phone fa-3x sr-contact"></i>
+        <p>02 - 783 - 1789 </p>
+
+      </div>
+      <div class="col-lg-4 text-center">
+        <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+        <p><a href="mailto:Induk1166@gmail.com">Induk1166@gmail.com</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="An_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="font-size:30px;">&times;</span></button>
+      <div class="modal-body">
+        <div class="container-fluid" style="margin-top: 8%; margin-left:-5%;">
+          <div class="col-sm-12">
+            <div class="col-md-offset-1 col-md-2 col-sm-12">
+              <div class="footer-right" class='creators'>
+                <img class="img-circle img-responsive" src="{% static 'img/kong.png' %}" alt="" class="ourface">
+                <br>
+                <p class='name text-center'>공현택</p>
+                <br>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-12">
+              <div class="footer-right" class='creators'>
+                <img class="img-circle img-responsive" src="{% static 'img/gyu.jpg' %}" alt="" class="ourface">
+                <br>
+                <p class='name text-center'>권규혁</p>
+                <br>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-12">
+              <div class="footer-right" class='creators'>
+                <img class="img-circle img-responsive" src="{% static 'img/wonki.jpg' %}" alt="" class="ourface">
+                <br>
+                <p class='name text-center'>김원기</p>
+                <br>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-12">
+              <div class="footer-right" class='creators'>
+                <img class="img-circle img-responsive" src="{% static 'img/junghyun.jpg' %}" alt="" class="ourface">
+                <br>
+                <p class='name text-center'>김정현</p>
+                <br>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-12">
+              <div class="footer-right" class='creators'>
+                <img class="img-circle img-responsive" src="{% static 'img/hyerin.jpeg' %}" alt="" class="ourface">
+                <br>
+                <p class='name text-center'>이혜린</p>
+                <br>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="col-md-offset-3 col-md-4 col-sm-12">
+              <div class="footer-center" class='creators2'>
+                <img class="img-rectangle img-responsive" src="{% static 'img/hyuis_lion.jpg' %}" width = "300" alt="" class="lion">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="footer-center" class='creators2'>
+                <p class="name"><br><b>한양대학교 정보시스템학과</b></p>
+                <p class="name"><br><b><i>HANYANG UNIVERSITY ALL RIGHTS RESERVED</i></b><br></p>
+                <p class="name"><b><i>CONTACT NUMBER<br>010-8909-5178<br></i></b></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Footer Section END-->
+
+
+<!-- asdfasdfasdfasdf -->

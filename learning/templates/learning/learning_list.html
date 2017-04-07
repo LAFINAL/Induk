@@ -1,0 +1,70 @@
+
+{% extends 'base2.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="block-header">
+      <span>학습자료실</span>
+    </h1>
+    <br>
+    <br>
+    <br>
+      <table class="table">
+        <tr>
+          <td>글번호</td>
+          <td>제목 </td>
+          <td>글쓴이</td>
+          <td>작성날짜</td>
+        </tr>
+{% for learning in learning_list %}
+        <tr>
+          <td>{{learning.pk}}</td>
+          <td class="post_title"><a href = '{% url "learning:learning_detail" learning.pk %}'>{{learning.title}}</a></td>
+          <td>{{ learning.author.first_name }}</td>
+          <td>{{ learning.created_at }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+<nav class="text-left">
+      <ul class="pagination">
+      {% if learning_list.has_previous %}
+        <li>
+          <a href="?page={{ learning_list.previous_page_number}}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      {% else %}
+        <li class="disabled">
+          <a href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      {% endif %}
+      {% for page_number in learning_list.paginator.page_range %}
+        {% if page_number == learning_list.number %}
+          <li class="active"><a href="?page={{page_number}}">{{page_number}}</a></li>
+        {% else %}
+        <li><a href="?page={{page_number}}">{{page_number}}</a></li>
+        {% endif %}
+      {%endfor%}
+      {% if learning_list.has_next %}
+        <li>
+          <a href="?page={{ learning_list.next_page_number}}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+        </li>
+      {% else %}
+        <li class ="disabled">
+          <a href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+        </li>
+      {% endif %}
+      </ul>
+    </nav>
+    <a style="margin-left:10px" href="{% url 'learning:learning_new' %}">새 글쓰기</a>
+    <!-- Pagination -->
+
+   </div>
+  {% endblock %}

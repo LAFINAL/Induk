@@ -1,0 +1,165 @@
+{% extends 'base4.html' %}
+{% load customtags %}
+{% load staticfiles %}
+{% block css %}
+<style>
+.title_{
+    font-size:20px;
+}
+.author_{
+    color:gray;
+}
+.time_recorded{
+    color:gray;
+}
+.content_{
+    margin-top:40px;
+    margin-left:5%;
+    margin-right:5%;
+    font-size:20px;
+}
+.edit_del{
+    margin-right:5%;
+}
+.comment_body{
+margin:1%;
+}
+button[type=submit]{
+  margin:1%;
+  float:right;
+  color:white;
+  padding:5px 15px;
+  background:orange;
+  border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+ <div class="page-topbar">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+
+            <h3>공지 사항</h3>
+
+          </div>
+          <div class="col-sm-8 hidden-xs">
+
+            <ol class="breadcrumb">
+              <li><a href="{% url 'questions:questions_list' %}">Home</a></li>
+              <li><a href="{% url 'questions:questions_list' %}"> 리스트 보기 </a></li>
+              <li class="active">{{questions.title}}</li>
+            </ol>
+
+          </div>
+        </div> <!-- / .row -->
+      </div> <!-- / .container -->
+    </div>
+<div class = "container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="bolg__item">
+        <div class="blog__header">
+          <h1 class="blog__title">
+            {{ questions.title }}
+          </h1>
+          <ul class="blog__info">
+            <li><i class="fa fa-user"></i>&nbsp;{{ questions.author.first_name }}</li>
+            <li><i class="fa fa-calendar"></i>&nbsp;{{ questions.created_at}}</li>
+            <li><a href="/questions" style="color:white; background-color:orange;" class="btn btn-xs">List</a></li>
+            {% if request.user == questions.author %}
+              <li><a href="{% url 'questions:questions_edit' questions.pk %}" style="color:white; background-color: orange;" class="btn btn-xs">edit</a></li>
+              <li><a href="{% url 'questions:questions_del' questions.pk %}" style="color:white; background-color:orange;" class="btn btn-xs">delete</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="blog__body">
+          <p>
+            {{ questions.content|linebreaks }}
+          </p>
+        </div>
+
+         {% if questions.files %}
+          files : {{ questions.files.url|split:"/"|last }} <br/>
+          <a download="{{questions.files.url}}" href="{{questions.files.url}}">파일 다운로드 받기</a><br>
+        {% endif %}
+
+        {% if questions.image %}
+          images : <img src="{{ questions.image.url }}" class="img-responsive" style="max-width: 50%"> <br/>
+          <a download="{{questions.image.url}}" href="{{questions.image.url}}">이미지 다운로드 받기</a>
+        {% endif %}
+        <br/><br/>
+      </div>
+      <div class="comments">
+        {% include 'questions/questions_comment_form.html' %}
+      </div>
+    </div>
+  </div>
+</div>
+<!--<div class = "container">
+    <section class="content">
+        <div class="row text-left title_">
+            <h1 class = "title_">
+            <b> {{ questions.title }}</b>
+            </h1>
+            <hr width="100%" color="oranges">
+        </div>
+            <ul class = "text-left info_">
+
+            <i class = "fa fa-user"></i>
+                <span class="author_"> 작성자 : {{ questions.author.first_name }}</span>&nbsp&nbsp&nbsp
+            <i class = "fa fa-calendar"></i>
+                작성일 : <span class="time_recorded">{{ questions.created_at }}</span>
+           </ul>
+           </section>
+
+    <div class="content_">
+        {{ questions.content }} <br/>
+    </div>
+    {% if questions.files %}
+        files : {{ questions.files.url }} <br/>
+        <a download="{{questions.files.url}}" href="{{questions.files.url}}">파일 다운로드 받기</a>
+    {% endif %}
+
+    {% if questions.image %}
+        images : <img src="{{ questions.image.url }}" width="100%" height="50px"> <br/>
+        <a download="{{questions.image.url}}" href="{{questions.image.url}}">이미지 다운로드 받기</a>
+    {% endif %}
+    <br/><br/>
+
+    {% if request.user == questions.author %}
+    <div class="row text-left edit_del">
+        &nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'questions:questions_edit' questions.pk %}">EDIT</a>&nbsp;&nbsp;
+        <a href="{% url 'questions:questions_del' questions.pk %}">DELETE</a>&nbsp;&nbsp;
+        <a href=/questions>목록 보기</a>
+    </div>
+    {% endif %}
+</section>
+
+<form name="comment_new" action="{% url 'questions:questions_comment' pk=questions.pk %}" method="POST">
+    {% csrf_token %}
+    <textarea name="message" rows="3" cols="80"></textarea>
+    <input type="submit" value="댓글쓰기">
+</form>
+
+<div class="comments">
+{% now "SHORT_DATETIME_FORMAT" as time_now %}
+    {% for comment in comments %}
+            <div class="comment_body">
+      <span style="font-size:15pt;">{{comment.message}} </span><span style="color:orange;">by</span> <span style="color:gray;">{{comment.author}}</span><br/><span style="margin-left:2%; color:gray; font-size:8pt;">{{ comment.created_at|timesince }}전</span>
+    </div>
+    {% endfor %}
+</div> -->
+
+{% endblock %}
+{% block javascript %}
+<script>
+var js_root = "{% static 'js/comment_add.js'%}"
+</script>
+<script src="{% static 'js/comment_add.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<title>{% block title %}仁德會計法人{% endblock %}</title>
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" />
+
+
+
+<!-- Bootstrap Core CSS -->
+    <link href='{% static "vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href='{% static "vendor/font-awesome/css/font-awesome.min.css" %}' rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href='{% static "vendor/magnific-popup/magnific-popup.css" %}' rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href='{% static "css/creative.min2.css" %}' rel="stylesheet">
+{% block css %}
+{% endblock %}
+</head>
+
+<body id="page-top">
+{% if messages %}
+   {% for message in messages %}
+     <div style="margin:0px" class="text-center alert alert-{{ message.tags }}">
+       {{ message }}
+     </div>
+   {% endfor %}
+ {% endif %}
+
+    {% include 'navbar.html' %}
+
+    <header></header>
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">2016 연말정산 TF</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                    <a href="{% url 'learning:learning_list' %}"><i class="fa fa-4x fa-diamond text-primary sr-icons"></i> </a>
+                        <h3>Learning Materials</h3>
+                        <p class="text-muted">학습자료</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <a href="{% url 'report:report_index' %}"><i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i></a>
+                        <h3>Daily Report</h3>
+                        <p class="text-muted">기업 상담 자료실</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <a href="{% url 'notice:notice_list' %}"><i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i></a>
+                        <h3>Notice</h3>
+                        <p class="text-muted">인덕회계법인 공지사항</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <a href="{% url 'questions:questions_list' %}"><i class="fa fa-4x fa-heart text-primary sr-icons"></i></a>
+                        <h3>Questions</h3>
+                        <p class="text-muted">질문게시판</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% block content %} {% endblock %}
+
+    {% include 'footer.html' %}
+
+        <!-- jQuery -->
+    <script src='{% static "vendor/jquery/jquery.min.js" %}'></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src='{% static "vendor/bootstrap/js/bootstrap.min.js" %}'></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src='{% static "vendor/scrollreveal/scrollreveal.min.js" %}'></script>
+    <script src='{% static "vendor/magnific-popup/jquery.magnific-popup.min.js" %}'></script>
+
+    <!-- Theme JavaScript -->
+    <script src='{% static "js/creative.min.js" %}'></script>
+
+    {% block javascript %}
+
+    {% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+{% load customtags %}
+<div class="comments__new">
+    <form name="comment_new" action="{% url 'learning:learning_comment' pk=learning.pk %}" method="POST">
+        {% csrf_token %}
+        <textarea class="form-control" name="message" rows="1" placeholder="Write your comment here"></textarea>
+        <input type="hidden" id="comments_count" name="comments_count" value="{{ comments.count }}" />
+        <button type="submit" id="comments__new" class="comments__new" class="btn btn-primary" value="SAVE">SAVE</button>
+    </form>
+</div>
+<br/>
+<div class="comments__list">
+    <div class="comments__heading">{{ comments.count }} comments</div>
+    <hr/>
+    <div class="comments__item">
+        {% for comment in comments %}
+        <div class="comments-item__body">
+            <div class="comments-item__info">
+                <div class="comments-item-info__author">
+                    {{ comment.author.first_name }}
+                </div>
+                <div class="comments-item-info__divider"><i class="fa fa-circle"></i></div>
+                <div class="comments-item-info__timestamp">{{ comment.created_at|timesince|split:","|first }}전</div>
+                <div class="comments-item__content">{{ comment.message }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

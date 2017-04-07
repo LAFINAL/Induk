@@ -1,0 +1,22 @@
+
+{% extends 'base2.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="block-header">
+      <span>기업 자료실</span>
+    </h1>
+    <br>
+    <br>
+    <br>
+      <table class="table">
+				{% for company in company_list %}
+				{% cycle '<tr>' '' '' '' '' %}
+					<td><a href ="{% url 'report:report_list' company=company.company %}">{{company.title}}</a></td>
+				{% cycle '' '' '' '' '</tr>' %}
+				{% endfor %}
+    </table>
+
+   </div>
+  {% endblock %}

@@ -1,0 +1,51 @@
+{%load staticfiles %}
+
+<!-- server git pull test -->
+
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                {% if user.is_authenticated %}
+                    <a class="navbar-brand page-scroll" href="{% url 'notice:main' %}">仁德會計法人</a>
+                {% else %}
+                <a class="navbar-brand page-scroll" href="{% url 'notice:index' %}">仁德會計法人</a>
+                {% endif %}
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a class="page-scroll" href="{% url 'notice:main' %}">Menu</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'accounts:logout' %}?next={% url 'notice:index' %}">Logout</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="{% url 'accounts:mypage' %}">MY PAGE</a>
+                        </li>
+						<!-- <li>
+							<a class="page-scroll" href="{% url 'accounts:password_reset' %}">비밀번호 변경</a>
+						</li>
+                        {% if user.is_staff %}
+                            <li>
+                                <a class="page-scroll" href="{% url 'accounts:password_reset_admin' %}">비밀번호 초기화</a>
+                            </li>
+                        {% endif %} -->
+                     {% else %}
+                         <!-- <li>
+                             <a class="page-scroll" href="{% url 'accounts:login' %}">Login</a>
+                         </li> -->
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
